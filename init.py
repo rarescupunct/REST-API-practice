@@ -1,17 +1,13 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, request
+
 app = Flask(__name__)
 
-@app.route('/')
-def api_root():
-    return 'Welcome!'
-
-@app.route('/articles')
-def api_articles():
-    return 'List of ' + url_for('api_articles')
-
-@app.route('/articles/<article_id>')
-def api_article(article_id):
-    return 'You are reading ' + article_id
+@app.route('/hello')
+def api_hello():
+    if "name" in request.args:
+        return f"Hello, {request.args['name']}!"
+    else:
+        return "Hello, Ragazzi!"
 
 if __name__ == "__main__":
     app.run()
